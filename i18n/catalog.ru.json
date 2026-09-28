@@ -1,0 +1,1044 @@
+{
+  "index.html": [
+    [
+      "lang=\"en\"",
+      "lang=\"ru\""
+    ],
+    [
+      "System One: fast judgments and deliberate checks",
+      "System One: быстрые суждения и осознанная проверка"
+    ],
+    [
+      "Explore System One thinking, its limits, and how fast judgments can be used in software. Interactive examples, with Jev as a case study.",
+      "Узнайте, как работает System One, каковы её ограничения и как применять быстрые суждения в программных системах. Интерактивные примеры и разбор Jev."
+    ],
+    [
+      "Understanding <em>System One</em>",
+      "Как устроена <em>System One</em>"
+    ],
+    [
+      "Thinking can be described in two modes: System One is fast and intuitive, System Two is slow and deliberate. LLMs can support both, but thorough reasoning takes time and compute.",
+      "В мышлении выделяют два режима: Система 1 работает быстро и интуитивно, а Система 2 медленно и обдуманно. Большие языковые модели (LLM) могут поддерживать оба режима, но подробное рассуждение требует времени и вычислительных ресурсов."
+    ],
+    [
+      "System One models skip text generation. Given state and a bounded question with predefined answer types, they predict probabilities in a single forward pass.",
+      "Модели System One обходятся без генерации текста. Получив состояние и чётко ограниченный вопрос с заранее заданными типами ответов, они за один прямой проход предсказывают вероятности."
+    ],
+    [
+      "This produces fast, low-cost predictions with scores that express the model’s confidence. This guide explains how the approach works, then applies it to software design.",
+      "Так получаются быстрые и недорогие предсказания с оценками уверенности модели. Сначала мы объясним, как работает этот подход, а затем применим его к проектированию программных систем."
+    ],
+    [
+      "<dt>System One</dt>",
+      "<dt>Система 1</dt>"
+    ],
+    [
+      "<dt>System Two</dt>",
+      "<dt>Система 2</dt>"
+    ],
+    [
+      "<dt>Strength</dt>",
+      "<dt>Сильная сторона</dt>"
+    ],
+    [
+      "<dt>Risk</dt>",
+      "<dt>Риск</dt>"
+    ],
+    [
+      "<dt>Software analogy</dt>",
+      "<dt>Аналогия в ПО</dt>"
+    ],
+    [
+      "<dt>Case study</dt>",
+      "<dt>Пример применения</dt>"
+    ],
+    [
+      "<dd>fast, automatic judgments</dd>",
+      "<dd>быстрые автоматические суждения</dd>"
+    ],
+    [
+      "<dd>effortful, deliberate thought</dd>",
+      "<dd>осознанное мышление, требующее усилий</dd>"
+    ],
+    [
+      "<dd>familiar patterns</dd>",
+      "<dd>знакомые шаблоны</dd>"
+    ],
+    [
+      "<dd>plausible but wrong impressions</dd>",
+      "<dd>правдоподобные, но ошибочные впечатления</dd>"
+    ],
+    [
+      "<dd>focused prediction + checks</dd>",
+      "<dd>узконаправленное предсказание + проверки</dd>"
+    ],
+    [
+      "<dd>Jev × WebMCP extension</dd>",
+      "<dd>расширение Jev × WebMCP</dd>"
+    ],
+    [
+      "We are illustrating a software workflow, not a model of the brain. Psychological descriptions and AI product categories should not be treated as equivalent.",
+      "Здесь показан рабочий процесс программы, работу мозга он не моделирует. Психологические описания и категории ИИ-продуктов не следует отождествлять."
+    ],
+    [
+      "aria-label=\"Sheets\"",
+      "aria-label=\"Разделы\""
+    ],
+    [
+      "<span>Thinking</span>",
+      "<span>Мышление</span>"
+    ],
+    [
+      "<span>Categories</span>",
+      "<span>Категории</span>"
+    ],
+    [
+      "<span>Scales</span>",
+      "<span>Шкалы</span>"
+    ],
+    [
+      "<span>Thresholds</span>",
+      "<span>Пороги</span>"
+    ],
+    [
+      "<span>Workflow</span>",
+      "<span>Процесс</span>"
+    ],
+    [
+      "<span>Confidence</span>",
+      "<span>Уверенность</span>"
+    ],
+    [
+      "<span>Limitations</span>",
+      "<span>Ограничения</span>"
+    ],
+    [
+      "<span>Case study</span>",
+      "<span>Пример</span>"
+    ],
+    [
+      "<h2>Two modes of thinking</h2>",
+      "<h2>Два режима мышления</h2>"
+    ],
+    [
+      "<h2>Recognizing categories</h2>",
+      "<h2>Распознавание категорий</h2>"
+    ],
+    [
+      "<h2>Judging on a scale</h2>",
+      "<h2>Оценка по шкале</h2>"
+    ],
+    [
+      "<h2>From estimate to action</h2>",
+      "<h2>От оценки к действию</h2>"
+    ],
+    [
+      "<h2>Composing a workflow</h2>",
+      "<h2>Построение рабочего процесса</h2>"
+    ],
+    [
+      "<h2>Using confidence</h2>",
+      "<h2>Как использовать уверенность</h2>"
+    ],
+    [
+      "<h2>Limitations</h2>",
+      "<h2>Ограничения</h2>"
+    ],
+    [
+      "<h2>Case study: Jev × WebMCP</h2>",
+      "<h2>Пример: Jev × WebMCP</h2>"
+    ],
+    [
+      "Intuition and deliberate checking.",
+      "Интуиция и осознанная проверка."
+    ],
+    [
+      "Select an option from a defined set.",
+      "Выбор варианта из заданного набора."
+    ],
+    [
+      "A probability-weighted mean.",
+      "Среднее, взвешенное по вероятностям."
+    ],
+    [
+      "Estimate the probability of a statement.",
+      "Оценка вероятности утверждения."
+    ],
+    [
+      "Evaluate independent questions in one call.",
+      "Ответы на независимые вопросы за один вызов."
+    ],
+    [
+      "Define when to act, review, or defer.",
+      "Когда действовать, отправлять на проверку или откладывать решение."
+    ],
+    [
+      "Where an initial judgment needs checking.",
+      "Когда первоначальное суждение нужно проверить."
+    ],
+    [
+      "A Chrome extension for selecting and preparing tool calls.",
+      "Расширение Chrome для выбора и подготовки вызовов инструментов."
+    ],
+    [
+      "In the framework popularized by Daniel Kahneman, System One operates automatically and associatively, whereas System Two demands focus and conscious effort. These are descriptions of processing, not two literal compartments in the brain.",
+      "В концепции, которую популяризировал Даниэль Канеман, Система 1 работает автоматически и ассоциативно, а Система 2 требует сосредоточенности и осознанных усилий. Эти термины описывают способы обработки информации и не означают, что в мозге буквально есть два отдельных отдела."
+    ],
+    [
+      "For example, recognizing a word happens instantly, while multi-digit math demands step-by-step mental effort.",
+      "Например, знакомое слово распознаётся мгновенно, а вычисления с многозначными числами требуют умственного усилия и идут шаг за шагом."
+    ],
+    [
+      "What feels effortless shifts with experience, but speed doesn’t guarantee accuracy. Intuition and deliberate analysis are both capable of error. Rapid impressions may work well in familiar territory, but complex tasks always require deliberate checking.",
+      "С опытом меняется то, что даётся без усилий, но скорость не гарантирует точности. Ошибаться могут и интуиция, и осознанный анализ. В знакомых ситуациях быстрые впечатления могут хорошо работать, но сложные задачи всегда требуют осознанной проверки."
+    ],
+    [
+      "Select an example in the diagram. The paths illustrate the distinction; they do not measure cognition or show neural activity. Background: Kahneman’s",
+      "Выберите пример на схеме. Пути иллюстрируют различие двух режимов: они не измеряют когнитивные процессы и не показывают нейронную активность. Подробнее об этом можно прочитать в"
+    ],
+    [
+      ">Nobel lecture<",
+      ">Нобелевской лекции Канемана<"
+    ],
+    [
+      "In software architecture, classification serves as a natural analogue to quick human judgment: both rapidly map a complex input to a predetermined category. A customer support message, for instance, might be routed to billing, technical integration, or sales.",
+      "В архитектуре ПО быстрому человеческому суждению естественно соответствует классификация: в обоих случаях сложные входные данные быстро относят к заранее определённой категории. Например, обращение в поддержку можно направить в отдел оплаты, технической интеграции или продаж."
+    ],
+    [
+      "The answer space determines what the system can express. Because a system can only express what its answer space allows, including graceful fallback categories like \"other\" or \"insufficient information\" is essential.",
+      "Пространство ответов определяет, что система вообще может выразить. Поэтому в него обязательно нужно включить запасные категории, например «другое» или «недостаточно информации»."
+    ],
+    [
+      "The visualizations here illustrate categorical probability distributions, where the sum of all outcomes equals 1. Toggling between presets demonstrates the contrast between a decisive confidence score and a near-tie.",
+      "Визуализации показывают категориальные распределения вероятностей: сумма вероятностей всех исходов равна 1. Переключайте примеры, чтобы сравнить уверенный выбор одного варианта и почти равные оценки."
+    ],
+    [
+      "Some judgments measure degree rather than category. An ordered rubric can help make this explicit. For example, one could score a tone as 0 (calm), 1 (frustrated but civil), or 2 (very angry)..",
+      "Одни суждения выбирают категорию, другие измеряют степень выраженности признака. Упорядоченная шкала оценивания помогает сделать это явным. Например, тон сообщения можно оценить как 0 (спокойный), 1 (раздражённый, но вежливый) или 2 (очень сердитый)."
+    ],
+    [
+      "<strong>Define the scale.</strong> Assign ordered levels 0, 1, and 2 to the descriptions.",
+      "<strong>Задайте шкалу.</strong> Сопоставьте описаниям упорядоченные уровни 0, 1 и 2."
+    ],
+    [
+      "<strong>Represent uncertainty.</strong> Give each level a probability, with a total of 1.",
+      "<strong>Выразите неопределённость.</strong> Назначьте каждому уровню вероятность так, чтобы их сумма была равна 1."
+    ],
+    [
+      "<strong>Compute a summary.</strong> The weighted mean is the sum of each level number multiplied by its probability.",
+      "<strong>Вычислите итог.</strong> Взвешенное среднее равно сумме произведений номера каждого уровня на его вероятность."
+    ],
+    [
+      "<strong>Inspect what the mean hides.</strong> A distribution concentrated near 1 and one split between 0 and 2 can have the same mean.",
+      "<strong>Посмотрите, что скрывает среднее.</strong> Распределение, сосредоточенное около 1, и распределение, разделённое между 0 и 2, могут иметь одинаковое среднее."
+    ],
+    [
+      "Assigning equally spaced numbers to these levels is a deliberate design choice, not a precise measurement of feeling. The final score simply marks a relative position on this rubric.",
+      "Равные интервалы между числовыми уровнями выбраны при проектировании сознательно. Точного измерения чувств они не дают. Итоговая оценка лишь указывает относительное положение на этой шкале."
+    ],
+    [
+      "These are illustrative distributions. The first assigns all probability to level 1, giving a score of 1.0. Sliders set relative weights, which are normalized to sum to 1; all-zero weights use equal probabilities.",
+      "Эти распределения приведены для примера. В первом вся вероятность приходится на уровень 1, поэтому оценка равна 1,0. Ползунки задают относительные веса, которые нормируются так, чтобы в сумме давать 1. Если все веса нулевые, используются равные вероятности."
+    ],
+    [
+      "Predicting an outcome and acting on it are two different things. An estimate measures uncertainty, and a decision balances that uncertainty against the cost of an error.",
+      "Предсказать исход ещё не значит решить, как поступить. Оценка измеряет неопределённость, а решение соотносит её с ценой ошибки."
+    ],
+    [
+      "<strong>Estimate.</strong> A score from 0 to 1 indicates the predicted probability that a message is urgent.",
+      "<strong>Оценка.</strong> Значение от 0 до 1 показывает предсказанную вероятность того, что сообщение срочное."
+    ],
+    [
+      "<strong>Policy.</strong> A decision threshold converts this score into a boolean action. Shifting the threshold changes the system's behavior without altering the underlying evidence.",
+      "<strong>Правило.</strong> Порог принятия решения превращает оценку в логическое решение: действовать или нет. Если сдвинуть порог, поведение системы изменится, а исходные данные останутся прежними."
+    ],
+    [
+      "A lower cutoff catches more cases but triggers more false alarms. A higher cutoff avoids false alarms but misses real cases. Choose your threshold by testing this tradeoff on labeled data.",
+      "Низкий порог ловит больше случаев, но чаще даёт ложные срабатывания. Высокий порог защищает от ложных срабатываний, но пропускает реальные случаи. Подбирайте порог, оценивая этот компромисс на размеченных данных."
+    ],
+    [
+      "Both controls are simulated. The 0.90 cutoff is an example, not a universal recommendation.",
+      "Оба ползунка управляют симуляцией. Порог 0,90 взят для примера, универсальной рекомендацией его считать не стоит."
+    ],
+    [
+      "Decoupling feature evaluation from decision logic provides a robust design pattern for intelligent systems. Rather than monolithically processing a support ticket, the architecture estimates discrete attributes in isolation: classification, urgency, and sentiment. It then delegates decision execution to a rules engine.",
+      "Интеллектуальные системы надёжнее проектировать, отделяя оценку признаков от логики принятия решений. Вместо монолитной обработки обращения система независимо оценивает отдельные характеристики: категорию, срочность и тональность. Решение затем исполняет механизм правил."
+    ],
+    [
+      "<strong>Parallel Execution:</strong> Evaluative tasks that consume the same input can run concurrently when supported by the architecture.",
+      "<strong>Параллельное выполнение.</strong> Оценочные задачи с одними и теми же входными данными могут выполняться параллельно, если архитектура это поддерживает."
+    ],
+    [
+      "<strong>Sequential Pipelines:</strong> Chain dependent tasks so downstream steps receive upstream outputs.",
+      "<strong>Последовательные конвейеры.</strong> Связывайте зависимые задачи в цепочку, чтобы последующие шаги получали результаты предыдущих."
+    ],
+    [
+      "<strong>Deterministic Execution:</strong> Guardrails, financial calculations,and policy constraints should always be handled via deterministic code rather than probabilistic models.",
+      "<strong>Детерминированное выполнение.</strong> Защитные механизмы, финансовые расчёты и ограничения, заданные правилами, всегда нужно реализовывать детерминированным кодом, без вероятностных моделей."
+    ],
+    [
+      "The diagram assumes 120 ms per request: 40 sequential calls take 4.8 seconds, while the combined call is assumed to take 120 ms.",
+      "В схеме каждый запрос условно длится 120 мс: 40 последовательных вызовов занимают 4,8 секунды, а объединённый вызов, по допущению, тоже укладывается в 120 мс."
+    ],
+    [
+      "Model predictions don't need to execute immediately. Workflows can pause, request review, or gather more data. We can implement checks on a fast impression.",
+      "Предсказание модели не обязательно сразу превращать в действие. Процесс может приостановиться, запросить проверку или собрать больше данных. Быстрое впечатление можно подкрепить проверками."
+    ],
+    [
+      "Relying on confidence scores requires verifying calibration across large test sets: a 0.9 score doesn't mean 90% accuracy unless cases rated at 80% actually succeed 80% of the time.",
+      "Чтобы опираться на оценки уверенности, нужно проверить их калибровку на больших тестовых выборках: оценка 0,9 означает 90% точности, только если предсказания с такой оценкой действительно оказываются верными в 90% случаев."
+    ],
+    [
+      "// Pseudocode: thresholds require validation.",
+      "// Псевдокод: пороги необходимо проверить на данных."
+    ],
+    [
+      "High confidence never replaces access controls or policy checks. Tune these thresholds for each specific task. High-risk actions may always require human confirmation regardless of score.",
+      "Высокая уверенность никогда не заменяет контроль доступа и проверку на соответствие правилам. Настраивайте пороги под каждую конкретную задачу. Для действий с высоким риском подтверждение человеком может требоваться всегда, независимо от оценки."
+    ],
+    [
+      "TThe diagram and code use the same intervals. Test thresholds separately for each task.",
+      "Схема и код используют одинаковые интервалы. Проверяйте пороги отдельно для каждой задачи."
+    ],
+    [
+      "<dt>False Familiarity</dt>",
+      "<dt>Ложное узнавание</dt>"
+    ],
+    [
+      "<dt>Incomplete Data</dt>",
+      "<dt>Неполные данные</dt>"
+    ],
+    [
+      "<dt>Changed conditions</dt>",
+      "<dt>Изменившиеся условия</dt>"
+    ],
+    [
+      "<dt>Precision and consistency</dt>",
+      "<dt>Точность и согласованность</dt>"
+    ],
+    [
+      "<dt>Consequences of error</dt>",
+      "<dt>Последствия ошибки</dt>"
+    ],
+    [
+      "<dt>An imperfect analogy</dt>",
+      "<dt>Неточная аналогия</dt>"
+    ],
+    [
+      "A case can closely resemble a known pattern while differing in one decisive detail. Always inspect the evidence supporting a classification.",
+      "Случай может очень походить на знакомый шаблон и при этом отличаться одной решающей деталью. Всегда проверяйте, на каких данных основана классификация."
+    ],
+    [
+      "When inputs lack required context, ensure the system can explicitly abstain rather than guess.",
+      "Если во входных данных не хватает нужного контекста, у системы должна быть возможность явно воздержаться от ответа, чтобы не пришлось гадать."
+    ],
+    [
+      "Test models against the target production environment. Past accuracy does not transfer automatically.",
+      "Проверяйте модели в той среде, где они будут работать. Точность, достигнутая раньше, автоматически не переносится."
+    ],
+    [
+      "Use deterministic code for precise calculations and policy checks. Plausibility is not proof.",
+      "Для точных расчётов и проверок на соответствие правилам используйте детерминированный код. Правдоподобие ещё ничего не доказывает."
+    ],
+    [
+      "Set review requirements based on the real-world consequences of an error, not the speed or fluency of the prediction.",
+      "Требования к проверке определяйте по реальным последствиям ошибки. Скорость и гладкость предсказания значения не имеют."
+    ],
+    [
+      "Fast software is not necessarily intuitive, and generated text is not necessarily deliberate reasoning. Assess the task and implementation directly.",
+      "Быстрая программа не обязательно работает как интуиция, а сгенерированный текст не обязательно результат обдуманного рассуждения. Оценивайте саму задачу и её реализацию напрямую."
+    ],
+    [
+      "The <strong>Jev × WebMCP extension</strong> puts this workflow in a browser side panel. As a user types, it predicts a tool and its arguments from the tools exposed by the current page. The panel shows the proposed call, confidence, and request latency.",
+      "<strong>Расширение Jev × WebMCP</strong> переносит этот процесс в боковую панель браузера. Пока пользователь печатает, оно предсказывает инструмент из доступных на текущей странице и его аргументы. Панель показывает предлагаемый вызов, уверенность и задержку запроса."
+    ],
+    [
+      "<strong>Discover.</strong> On an enabled site, read the available WebMCP tools, descriptions, and input schemas.",
+      "<strong>Обнаружить.</strong> На сайте с поддержкой WebMCP получить доступные инструменты, их описания и схемы входных данных."
+    ],
+    [
+      "<strong>Evaluate.</strong> Convert those schemas into Jev questions. Select a tool, identify argument values, and allow a “no tool fits” result.",
+      "<strong>Оценить.</strong> Преобразовать схемы в вопросы Jev. Выбрать инструмент, определить значения аргументов и предусмотреть ответ «нет подходящего инструмента»."
+    ],
+    [
+      "<strong>Assemble.</strong> Combine the answers into a proposed call. Missing arguments remain available for manual entry.",
+      "<strong>Собрать.</strong> Объединить ответы в предлагаемый вызов. Недостающие аргументы можно ввести вручную."
+    ],
+    [
+      "<strong>Apply policy.</strong> Run eligible read-only calls automatically when checks pass, or request user action and confirmation.",
+      "<strong>Применить правила.</strong> Автоматически выполнить разрешённые вызовы только для чтения после успешных проверок либо запросить действие и подтверждение пользователя."
+    ],
+    [
+      "WebMCP supplies the page’s tool interface. Jev supplies structured judgments. The extension connects them and controls execution. Tool selection is derived from the schemas rather than site-specific configuration.",
+      "WebMCP предоставляет интерфейс инструментов страницы, а Jev выдаёт структурированные суждения. Расширение связывает их и управляет выполнением. Инструмент выбирается по схемам, отдельно настраивать каждый сайт не нужно."
+    ],
+    [
+      ">Explore the extension<",
+      ">Посмотреть расширение<"
+    ],
+    [
+      ">Testing site<",
+      ">Тестовый сайт<"
+    ],
+    [
+      "&amp;hl=en",
+      "&amp;hl=ru"
+    ],
+    [
+      "A grocery search in the side panel",
+      "Поиск продуктов в боковой панели"
+    ],
+    [
+      "A simulated replay of a grocery search, with the extension enabled on the test site provided.",
+      "Симуляция поиска продуктов с расширением, включённым на тестовом сайте по ссылке выше."
+    ],
+    [
+      "Schema Mapping",
+      "Сопоставление схем"
+    ],
+    [
+      "Tools & Enums: Converted into discrete categorical choices.",
+      "Инструменты и перечисления преобразуются в выбор из заданных категорий."
+    ],
+    [
+      "Booleans: Mapped to true/false evaluations.",
+      "Логические значения преобразуются в оценки true/false."
+    ],
+    [
+      "Free-text: Selected from spans of the user’s input.",
+      "Свободный текст выбирается из фрагментов пользовательского ввода."
+    ],
+    [
+      "From prediction to execution",
+      "От предсказания к выполнению"
+    ],
+    [
+      "Model predictions are strictly decoupled from execution rights. State-changing calls require user initiation, and high-consequence actions demand secondary confirmation regardless of reported confidence.",
+      "Предсказания модели строго отделены от права на выполнение. Вызовы, изменяющие состояние, должен инициировать пользователь. Действия с серьёзными последствиями требуют дополнительного подтверждения независимо от заявленной уверенности."
+    ],
+    [
+      "Jev’s role",
+      "Роль Jev"
+    ],
+    [
+      "Jev is TypeSafe’s implementation",
+      "Jev от TypeSafe реализует"
+    ],
+    [
+      " of focused, typed judgments. Its Choice, Score, and Noul interfaces are concrete examples of the ideas above. Its ",
+      " узконаправленные типизированные суждения. Интерфейсы Choice, Score и Noul показывают описанные выше идеи на практике. "
+    ],
+    [
+      "documented limitations",
+      "Задокументированные ограничения"
+    ],
+    [
+      " still apply; the extension’s checks do not make predictions infallible.",
+      " остаются в силе: проверки расширения не делают предсказания безошибочными."
+    ],
+    [
+      "<strong>Reading further.</strong> Start with Daniel Kahneman’s ",
+      "<strong>Что почитать дальше.</strong> Начните с лекции Даниэля Канемана "
+    ],
+    [
+      ">Maps of Bounded Rationality<",
+      ">«Карты ограниченной рациональности»<"
+    ],
+    [
+      " for the psychological distinction. The software diagrams here are teaching examples. ",
+      " о различии двух режимов мышления. Схемы программных систем на этой странице приведены как учебные примеры. "
+    ],
+    [
+      "TypeSafe’s documentation",
+      "Документация TypeSafe"
+    ],
+    [
+      " describes its particular use of the term.",
+      " описывает, как именно компания использует этот термин."
+    ],
+    [
+      "All demos run locally without model requests. By ",
+      "Все демонстрации работают локально, без запросов к моделям. Автор — "
+    ],
+    [
+      ">Sarah Drasner</a>. ",
+      ">Сара Драснер</a>. Перевод ChatGPT. "
+    ],
+    [
+      ">Source<",
+      ">Исходный код оригинала<"
+    ]
+  ],
+  "src/main.js": [
+    [
+      "document.fonts.load(face)",
+      "document.fonts.load(face, 'АБВабвABC')"
+    ]
+  ],
+  "src/lib/scene.js": [
+    [
+      "\"Animation playback\"",
+      "\"Управление анимацией\""
+    ],
+    [
+      "\"Replay\"",
+      "\"Повторить\""
+    ],
+    [
+      "\"Stop\"",
+      "\"Остановить\""
+    ]
+  ],
+  "src/scenes/thinking.js": [
+    [
+      "'Recognize a familiar word'",
+      "'Узнать знакомое слово'"
+    ],
+    [
+      "'APPLE'",
+      "'ЯБЛОКО'"
+    ],
+    [
+      "'letters'",
+      "'буквы'"
+    ],
+    [
+      "'familiar pattern'",
+      "'знакомый образ'"
+    ],
+    [
+      "'recognition'",
+      "'узнавание'"
+    ],
+    [
+      "'A familiar word can be recognized without consciously checking every letter.'",
+      "'Знакомое слово можно узнать, не проверяя осознанно каждую букву.'"
+    ],
+    [
+      "'Check a calculation'",
+      "'Проверить вычисление'"
+    ],
+    [
+      "'Breaking the calculation into parts exposes intermediate results that can be checked.'",
+      "'Если разбить вычисление на части, промежуточные результаты можно увидеть и проверить.'"
+    ],
+    [
+      "'Two conceptual paths: a direct route for recognition and a sequence of three checkpoints for deliberate calculation. Select an example to see its steps.'",
+      "'Два условных пути: прямой для узнавания и последовательность из трёх шагов для осознанного вычисления. Выберите пример, чтобы увидеть его шаги.'"
+    ],
+    [
+      "'RECOGNITION'",
+      "'УЗНАВАНИЕ'"
+    ],
+    [
+      "'DELIBERATE CHECKS'",
+      "'ОСОЗНАННАЯ ПРОВЕРКА'"
+    ],
+    [
+      ">Recognition and checking<",
+      ">Узнавание и проверка<"
+    ],
+    [
+      "Animation timing is for illustration. Familiarity and practice can change how a task is approached.",
+      "Длительность анимации условна. Знакомство с задачей и практика могут изменить способ её решения."
+    ]
+  ],
+  "src/scenes/choice.js": [
+    [
+      "'billing'",
+      "'оплата'"
+    ],
+    [
+      "'technical'",
+      "'техподдержка'"
+    ],
+    [
+      "'sales'",
+      "'продажи'"
+    ],
+    [
+      "'Clear preference'",
+      "'Явное предпочтение'"
+    ],
+    [
+      "'Ambiguous example'",
+      "'Неоднозначный пример'"
+    ],
+    [
+      "'Sales example'",
+      "'Пример с продажами'"
+    ],
+    [
+      "'Three probability towers. Height represents probability; selecting a preset changes the distribution. Exact values appear below.'",
+      "'Три столбца вероятностей. Высота показывает вероятность, а выбор примера меняет распределение. Точные значения приведены ниже.'"
+    ],
+    [
+      ">Three possible interpretations<",
+      ">Три возможные интерпретации<"
+    ],
+    [
+      "Switch distributions to compare a clear preference with a tie. All presets are illustrative probability distributions.",
+      "Переключайте распределения, чтобы сравнить явное предпочтение и равные оценки. Все распределения приведены для примера."
+    ]
+  ],
+  "src/scenes/score.js": [
+    [
+      "\"calm\"",
+      "\"спокойный\""
+    ],
+    [
+      "\"frustrated, civil\"",
+      "\"раздражённый, вежливый\""
+    ],
+    [
+      "\"very angry\"",
+      "\"очень сердитый\""
+    ],
+    [
+      "\"All probability at 1\"",
+      "\"Вся вероятность на уровне 1\""
+    ],
+    [
+      "\"Concentrated near 1\"",
+      "\"Сосредоточено около 1\""
+    ],
+    [
+      "\"Split between 0 and 2\"",
+      "\"Разделено между 0 и 2\""
+    ],
+    [
+      "\"A balance beam marked 0, 1 and 2. Weights stand on the levels in proportion to their probability, and the fulcrum sits where the beam balances, which is the score.\"",
+      "\"Балансир с отметками 0, 1 и 2. Веса на уровнях пропорциональны их вероятностям. Точка опоры находится там, где достигается равновесие: это и есть итоговая оценка.\""
+    ],
+    [
+      ">Where the distribution balances<",
+      ">Точка равновесия распределения<"
+    ]
+  ],
+  "src/scenes/noul.js": [
+    [
+      ">Setting a decision threshold<",
+      ">Выбор порога решения<"
+    ],
+    [
+      ">probability<",
+      ">вероятность<"
+    ],
+    [
+      ">simulated probability<",
+      ">смоделированная вероятность<"
+    ],
+    [
+      ">threshold<",
+      ">порог<"
+    ],
+    [
+      ">decision cutoff<",
+      ">порог решения<"
+    ],
+    [
+      "The illuminated sector marks values that pass the cutoff. Move either control to change the boolean result.",
+      "Подсвеченный сектор отмечает значения не ниже порога. Двигайте любой ползунок, чтобы изменить логический результат."
+    ],
+    [
+      "'A three-dimensional probability dial. A luminous needle shows the probability; a raised amber marker sets the decision threshold. Values and boolean result are printed below.'",
+      "'Трёхмерная шкала вероятности. Светящаяся стрелка показывает вероятность, а приподнятая янтарная метка задаёт порог решения. Значения и логический результат приведены ниже.'"
+    ],
+    [
+      "'PROBABILITY'",
+      "'ВЕРОЯТНОСТЬ'"
+    ]
+  ],
+  "src/scenes/parallel.js": [
+    [
+      "\"Illustration with assumed timings, not a benchmark. Two grids of forty questions. On the left they are answered one after another and it takes almost five seconds. On the right they are all answered at once in about a tenth of a second, and the code keeps only the five answers it needs.\"",
+      "\"Время на иллюстрации условное, производительность здесь не измеряется. Две сетки по сорок вопросов. Слева ответы приходят последовательно почти за пять секунд. Справа они приходят все сразу, примерно за десятую долю секунды, и код берёт из них только пять нужных.\""
+    ],
+    [
+      ">Sequential requests<",
+      ">Последовательно<"
+    ],
+    [
+      ">Combined request<",
+      ">Одним запросом<"
+    ],
+    [
+      ">40 round trips<",
+      ">40 запросов<"
+    ],
+    [
+      ">1 round trip. Code reads the 5 it needs.<",
+      ">1 запрос. Код берёт нужные 5.<"
+    ],
+    [
+      ">0.00 s<",
+      ">0.00 с<"
+    ],
+    [
+      ">0 ms<",
+      ">0 мс<"
+    ],
+    [
+      "${n.toFixed(2)} s",
+      "${n.toFixed(2)} с"
+    ],
+    [
+      "${Math.round(n)} ms",
+      "${Math.round(n)} мс"
+    ]
+  ],
+  "src/scenes/gates.js": [
+    [
+      "\"below 0.50\"",
+      "\"ниже 0.50\""
+    ],
+    [
+      "\"gather context\"",
+      "\"Собрать контекст\""
+    ],
+    [
+      "\"seek more information\"",
+      "\"Нужно больше сведений\""
+    ],
+    [
+      "\"confirm\"",
+      "\"Подтвердить\""
+    ],
+    [
+      "\"ask before acting\"",
+      "\"Спросить до действия\""
+    ],
+    [
+      "\"0.90 and up\"",
+      "\"от 0.90\""
+    ],
+    [
+      "\"act\"",
+      "\"Действовать\""
+    ],
+    [
+      "\"if policy permits\"",
+      "\"Если правила позволяют\""
+    ],
+    [
+      "\"A marble drops down one of three tracks depending on confidence. Below 0.5 it requests more context, between 0.5 and 0.9 it asks for confirmation, and at 0.9 or more it acts.\"",
+      "\"Шарик движется по одному из трёх путей в зависимости от уверенности. Ниже 0,5 система запрашивает контекст, от 0,5 до 0,9 просит подтверждения, а начиная с 0,9 действует.\""
+    ],
+    [
+      ">confidence<",
+      ">уверенность<"
+    ],
+    [
+      ">Low confidence · 0.320<",
+      ">Низкая уверенность · 0.320<"
+    ],
+    [
+      ">Review example · 0.780<",
+      ">Нужна проверка · 0.780<"
+    ],
+    [
+      ">High score · 1.000<",
+      ">Высокая оценка · 1.000<"
+    ]
+  ],
+  "src/scenes/wild.js": [
+    [
+      "\"got anything gluten free in the bakery aisle?\"",
+      "\"Есть что-нибудь без глютена в отделе выпечки?\""
+    ],
+    [
+      "\"no tool fits\"",
+      "\"Нет инструмента\""
+    ],
+    [
+      "\"A sentence is typed: got anything gluten free in the bakery aisle? While it is typed, probability bars settle on the search_products tool and its arguments fill in: department Bakery, dietary gluten-free. All routing probabilities are illustrative. The 164 millisecond label is from a README example, not a measured request here.\"",
+      "\"Печатается фраза: «Есть что-нибудь без глютена в отделе выпечки?» По мере ввода столбцы вероятностей указывают на search_products, а аргументы заполняются значениями Bakery для department и gluten-free для dietary. Вероятности показаны для наглядности. Значение 164 мс взято из примера README, здесь его не измеряли.\""
+    ],
+    [
+      ">164 ms*<",
+      ">164 мс*<"
+    ],
+    [
+      ">execution policy applies<",
+      ">С учётом правил<"
+    ]
+  ],
+  "src/scenes/machine.js": [
+    [
+      "\"Clear signal\"",
+      "\"Ясный сигнал\""
+    ],
+    [
+      "\"Mixed signals\"",
+      "\"Смешанные сигналы\""
+    ],
+    [
+      "\"No context\"",
+      "\"Нет контекста\""
+    ],
+    [
+      "\"Billing\"",
+      "\"Оплата\""
+    ],
+    [
+      "\"Access\"",
+      "\"Доступ\""
+    ],
+    [
+      "\"Other\"",
+      "\"Другое\""
+    ],
+    [
+      "\"A clear billing signal. Raise the cutoff above 94% to send even this prediction for review.\"",
+      "\"Ясный сигнал об оплате. Поднимите порог выше 94%, чтобы даже это предсказание отправлялось на проверку.\""
+    ],
+    [
+      "\"Almost a tie between billing and access. A lower cutoff can allow routing, but it does not make the evidence any clearer.\"",
+      "\"Оценки оплаты и доступа почти равны. Низкий порог может разрешить автоматическое направление, но исходные данные от этого не станут однозначнее.\""
+    ],
+    [
+      "\"No clear topic. An explicit “other” answer gives the workflow a way to ask for more context.\"",
+      "\"Тема неясна. Явный ответ «другое» позволяет запросить дополнительный контекст.\""
+    ],
+    [
+      "\"Ask for context\"",
+      "\"Запросить контекст\""
+    ],
+    [
+      "\"Send for review\"",
+      "\"Отправить на проверку\""
+    ],
+    [
+      "\"Other leads\"",
+      "\"Лидирует «Другое»\""
+    ],
+    [
+      "'“I was <mark>charged twice</mark> for the same invoice.”'",
+      "'«С меня <mark>дважды списали деньги</mark> по одному счёту». '"
+    ],
+    [
+      "'“I <mark>paid for an upgrade</mark>, but the new features are <mark>still locked</mark>.”'",
+      "'«Я <mark>оплатил новый тариф</mark>, но новые функции <mark>всё ещё недоступны</mark>». '"
+    ],
+    [
+      "'“<mark>Something is wrong.</mark> Can you help me sort it out?”'",
+      "'«<mark>Что-то не так.</mark> Поможете разобраться?»'"
+    ],
+    [
+      "aria-label=\"Choose an example message\"",
+      "aria-label=\"Выберите пример обращения\""
+    ],
+    [
+      "aria-label=\"Replay the prediction animation\"",
+      "aria-label=\"Повторить анимацию предсказания\""
+    ],
+    [
+      ">Support message<",
+      ">Обращение в поддержку<"
+    ],
+    [
+      ">Which team should handle this?<",
+      ">Какой отдел должен этим заняться?<"
+    ],
+    [
+      ">ONE FORWARD PASS<",
+      ">ОДИН ПРЯМОЙ ПРОХОД<"
+    ],
+    [
+      ">PREDICTED TOPIC<",
+      ">ПРЕДСКАЗАННАЯ ТЕМА<"
+    ],
+    [
+      ">State → probabilities<",
+      ">Состояние → вероятности<"
+    ],
+    [
+      ">No text generation<",
+      ">Без генерации текста<"
+    ],
+    [
+      ">80% cutoff<",
+      ">Порог 80%<"
+    ],
+    [
+      ">Auto-route cutoff<",
+      ">Порог автонаправления<"
+    ],
+    [
+      ">More automatic routing<",
+      ">Больше автоматики<"
+    ],
+    [
+      ">More review<",
+      ">Больше проверок<"
+    ],
+    [
+      ">Workflow decision<",
+      ">Решение системы<"
+    ],
+    [
+      ">Route to Billing<",
+      ">Направить: Оплата<"
+    ],
+    [
+      " Replay pass</button>",
+      " Повторить проход</button>"
+    ],
+    [
+      "`Route to ${categories[winner]}`",
+      "`Направить: ${categories[winner]}`"
+    ],
+    [
+      "${percent(threshold)} probability required to automatically route a named topic",
+      "Для автонаправления по конкретной теме нужна вероятность ${percent(threshold)}"
+    ],
+    [
+      "`${percent(threshold)} cutoff`",
+      "`Порог ${percent(threshold)}`"
+    ],
+    [
+      "One forward pass predicts: ${distribution}. Auto-route cutoff: ${percent(threshold)}. ${verdict}.",
+      "За один прямой проход модель предсказывает: ${distribution}. Порог автонаправления: ${percent(threshold)}. ${verdict}."
+    ],
+    [
+      "${example.name}: ${distribution}. Cutoff ${percent(threshold)}. ${verdict}. ${example.explanation}",
+      "${example.name}: ${distribution}. Порог ${percent(threshold)}. ${verdict}. ${example.explanation}"
+    ]
+  ],
+  "src/scenes/race.js": [
+    [
+      "\"Route this ticket to technical support.\"",
+      "\"Направьте заявку в техподдержку.\""
+    ],
+    [
+      "\"The message describes an integration\"",
+      "\"В сообщении описан сбой интеграции.\""
+    ],
+    [
+      "\"failure. The customer is frustrated\"",
+      "\"Клиент раздражён и просит\""
+    ],
+    [
+      "\"and requests urgent assistance.\"",
+      "\"срочно помочь.\""
+    ],
+    [
+      "\"of 2\"",
+      "\"из 2\""
+    ],
+    [
+      "\"yes\"",
+      "\"да\""
+    ],
+    [
+      "\"Illustrative output formats with assumed timings. Prose is displayed word by word and a category is extracted. Jev returns typed answers together. This does not compare measured model performance.\"",
+      "\"Форматы ответов и время условные. Текст появляется по словам, затем из него извлекается категория. Jev возвращает все типизированные ответы одновременно. Измеренную производительность моделей эта схема не сравнивает.\""
+    ],
+    [
+      "w === \"technical\"",
+      "w === \"техподдержку.\""
+    ],
+    [
+      ">Generated prose example<",
+      ">Пример генерации текста<"
+    ],
+    [
+      ">Jev typed-answer example<",
+      ">Типизированные ответы Jev<"
+    ],
+    [
+      ">category<",
+      ">категория<"
+    ],
+    [
+      ">0.00 s<",
+      ">0.00 с<"
+    ],
+    [
+      ">0 ms<",
+      ">0 мс<"
+    ],
+    [
+      ">Illustrative timings. LLMs can also produce structured output.<",
+      ">Время условное. LLM тоже могут выдавать структурированные ответы.<"
+    ],
+    [
+      "${n.toFixed(2)} s",
+      "${n.toFixed(2)} с"
+    ],
+    [
+      "${Math.round(n)} ms",
+      "${Math.round(n)} мс"
+    ]
+  ],
+  "src/scenes/request.js": [
+    [
+      "\"Hi, I've been trying to connect my Stripe account for 3 days and the integration keeps failing. I'm losing sales. Please help ASAP.\"",
+      "\"Здравствуйте! Уже три дня пытаюсь подключить свой аккаунт Stripe, но интеграция постоянно даёт сбой. Я теряю продажи. Пожалуйста, помогите как можно скорее.\""
+    ],
+    [
+      "\"Which team should handle this\"",
+      "\"Какой отдел должен этим заняться\""
+    ],
+    [
+      "\"How frustrated the customer appears\"",
+      "\"Насколько раздражённым кажется клиент\""
+    ],
+    [
+      "\"The message conveys urgency or time-sensitivity\"",
+      "\"Сообщение указывает на срочность или важность сроков\""
+    ],
+    [
+      "\"p 0.85 · confidence 0.78\"",
+      "\"p 0.85 · уверенность 0.78\""
+    ],
+    [
+      "\"of 0–2 · confidence 1.0\"",
+      "\"из 0–2 · уверенность 1.0\""
+    ],
+    [
+      "\"probability of yes\"",
+      "\"вероятность ответа «да»\""
+    ],
+    [
+      "\"of 2\"",
+      "\"из 2\""
+    ],
+    [
+      "\"yes\"",
+      "\"да\""
+    ],
+    [
+      "\"Three question tokens enter the Jev block side by side, and three answer plates slide out together, reading technical, 1.0 and 1.0.\"",
+      "\"Три жетона вопросов одновременно входят в блок Jev. Из него вместе выходят три таблички ответов: technical, 1.0 и 1.0.\""
+    ],
+    [
+      "\"STATE + QUESTIONS\"",
+      "\"СОСТОЯНИЕ + ВОПРОСЫ\""
+    ],
+    [
+      "\"ANSWERS, TOGETHER\"",
+      "\"ОТВЕТЫ ВМЕСТЕ\""
+    ],
+    [
+      "${callout(1)} state",
+      "${callout(1)} состояние"
+    ],
+    [
+      "${callout(2)} questions",
+      "${callout(2)} вопросы"
+    ],
+    [
+      "${callout(3)} answers",
+      "${callout(3)} ответы"
+    ],
+    [
+      "usage: 392 input tokens",
+      "расход: 392 входных токена"
+    ],
+    [
+      "from the TypeSafe quickstart",
+      "из вводного примера TypeSafe"
+    ]
+  ]
+}

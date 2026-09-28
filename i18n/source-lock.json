@@ -1,0 +1,18 @@
+{
+  "index.html": "061f80a94e6f3b8e1c7949ff2a2d3a01b7754011",
+  "src/lib/beam.js": "029003c2101cc853c8ae98b9e4eda0ae73dfc64a",
+  "src/lib/scene.js": "7ccd892b028d163c524121bdb1b0cb2058fe39d9",
+  "src/lib/stage3d.js": "380200be240f0b7ad513905f972638736ec264b3",
+  "src/main.js": "ff91574059ee442563330c2dc17e80a61ee22c98",
+  "src/scenes/choice.js": "c8a2c6a2c66c9923f3e68125d11313f8a9b29d3a",
+  "src/scenes/gates.js": "80e2b437948c8a8995d37e27d74ea47386d15834",
+  "src/scenes/machine.js": "e93130b866d22bebb6b8cd231ce0af3d4cec96a4",
+  "src/scenes/noul.js": "d7b9ba0aaf2283fd841fa57a6acefd47fddd7e86",
+  "src/scenes/parallel.js": "0c91b272467cd43155ca85e1f77ad54192197329",
+  "src/scenes/race.js": "f0fe8712eac2c2175000bd80e427af77e51fae5a",
+  "src/scenes/request.js": "1583868443854365e76d96699cfc13153799bee6",
+  "src/scenes/score.js": "8693ab9c6f38581b7ecdc6b03ebe6648051cd8d2",
+  "src/scenes/thinking.js": "6ae32a4f1fdf7143db3716ed24a6cf7019307c5c",
+  "src/scenes/wild.js": "34e1df953bd4b1d10f4169fba120af35fd162b47",
+  "src/style.css": "1952301fa3a26a81a8430db6e4287a5ac82dfd90"
+}
